@@ -15,23 +15,21 @@ def main():
     shipping_option2 = carrier2.connect_to_shop(shop2)
 
     # Set shipping method and cost
-    shipping_option1.shipping_method = "standard"
-    shipping_option1.shipping_cost = shipping_option1.get_shipping_cost()
+    shipping_option1.set_shipping_method("standard")
+    shipping_option1.set_package_weight(2.5)
 
-    shipping_option2.shipping_method = "express"
-    shipping_option2.shipping_cost = shipping_option2.get_shipping_cost()
+    shipping_option2.set_shipping_method("express")
+    shipping_option2.set_package_weight(1.8)
+
+    shipping_cost1 = shipping_option1.get_shipping_cost()
+    shipping_cost2 = shipping_option2.get_shipping_cost()
 
     # Print the shipping options and costs
-    print(f"Shipping option for {shop1.name} from {carrier1.name}:")
-    print(f"Shipping method: {shipping_option1.shipping_method}")
-    print(f"Shipping cost: {shipping_option1.shipping_cost}")
+    print(f"Shipping option for {shop1.name} from {carrier1.name}: {shipping_cost1}")
 
     print()
 
-    print(f"Shipping option for {shop2.name} from {carrier2.name}:")
-    print(f"Shipping method: {shipping_option2.shipping_method}")
-    print(f"Shipping cost: {shipping_option2.shipping_cost}")
-
+    print(f"Shipping option for {shop2.name} from {carrier2.name}: {shipping_cost2}")
 
 if __name__ == "__main__":
     main()

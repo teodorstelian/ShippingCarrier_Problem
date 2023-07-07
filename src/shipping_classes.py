@@ -18,6 +18,19 @@ class ShippingOption(Carrier):
         self.shipping_method = ""
         self.shipping_cost = 0.0
 
+    def set_shipping_method(self, method):
+        valid_methods = ["standard", "express"]
+        if method in valid_methods:
+            self.shipping_method = method
+        else:
+            raise ValueError("Invalid shipping method provided.")
+
+    def set_package_weight(self, weight):
+        if weight > 0:
+            self.shop.package_weight = weight
+        else:
+            raise ValueError("Invalid package weight provided.")
+
     def get_shipping_cost(self):
         if self.shipping_method == "standard":
             cost_per_kg = ShippingOption.COST_STANDARD
