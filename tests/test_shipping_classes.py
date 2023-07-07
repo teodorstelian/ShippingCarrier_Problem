@@ -47,6 +47,20 @@ class TestShippingClasses(unittest.TestCase):
         assert shop.name == "Shop 5"
         assert shop.package_weight == 1.5
 
+    def test_set_shipping_method_invalid(self):
+        shop = Shop("Shop 1", 2.5)
+        carrier = Carrier("Carrier 1", "Country 1")
+        shipping_option = carrier.connect_to_shop(shop)
+        with self.assertRaises(ValueError):
+            shipping_option.set_shipping_method("invalid_method")
+
+    def test_set_package_weight_invalid(self):
+        shop = Shop("Shop 1", 2.5)
+        carrier = Carrier("Carrier 1", "Country 1")
+        shipping_option = carrier.connect_to_shop(shop)
+        with self.assertRaises(ValueError):
+            shipping_option.set_package_weight(-1.0)
+
 
 if __name__ == "__main__":
     unittest.main()
