@@ -4,23 +4,27 @@ class Carrier:
         self.country = country
 
     def connect_to_shop(self, shop):
-        return ShippingOption(self.name, self.country, shop)
+        return ShippingOption(self, shop)
 
 
 class ShippingOption(Carrier):
-    def __init__(self, name, country, shop):
-        super().__init__(name, country)
+    COST_STANDARD = 0.5
+    COST_EXPRESS = 1.0
+    COST_DEFAULT = 0.75
+
+    def __init__(self, carrier, shop):
+        super().__init__(carrier.name, carrier.country)
         self.shop = shop
         self.shipping_method = ""
         self.shipping_cost = 0.0
 
     def get_shipping_cost(self):
         if self.shipping_method == "standard":
-            cost_per_kg = 0.5
+            cost_per_kg = ShippingOption.COST_STANDARD
         elif self.shipping_method == "express":
-            cost_per_kg = 1.0
+            cost_per_kg = ShippingOption.COST_EXPRESS
         else:
-            cost_per_kg = 0.75
+            cost_per_kg = ShippingOption.COST_DEFAULT
 
         return self.shop.package_weight * cost_per_kg
 
